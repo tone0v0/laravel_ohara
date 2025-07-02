@@ -16,8 +16,9 @@ Route::prefix('contacts') // 頭に contacts をつける
     ->name('contacts.') // ルート名 
     ->controller(ContactFormController::class) // コントローラ指定 
     ->group(function () { // グループ化 
-        Route::get('/', 'index')->name('index'); // 名前つきルート
-        Route::get('/create', 'create')->name('create');
+        Route::get('/', 'index')->name('index'); // index
+        Route::get('/create', 'create')->name('create'); // create
+        Route::get('/', 'store')->name('store'); // store
     });
 
 
