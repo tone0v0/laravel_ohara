@@ -63,7 +63,18 @@ class ContactFormController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //find ⇒1件データを取得。データが存在しない場合エラー
+        //findOrFail ⇒1件データを取得。データが存在しない場合404
+        $contact = ContactForm::findOrFail($id);
+
+        // 性別の表記処理
+        if ($contact->gender === 0) {
+            $gender = '男性';
+        } else {
+            $gender = '女性';
+        }
+
+        return view('contacts.show', compact('contact', 'gender'));
     }
 
     /**
@@ -71,7 +82,10 @@ class ContactFormController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // DBから1件だけデータを取得
+        $contact = ContactForm::FindOrFail($id);
+
+        return view('contacts.show', compact('contact', 'gender'));
     }
 
     /**

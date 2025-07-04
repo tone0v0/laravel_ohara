@@ -18,13 +18,15 @@ Route::prefix('contacts') // 頭に contacts をつける
     ->group(function () { // グループ化 
         Route::get('/', 'index')->name('index'); // index
         Route::get('/create', 'create')->name('create'); // create
-        Route::get('/', 'store')->name('store'); // store
+        Route::post('/', 'store')->name('store'); // store
+        Route::get('/{id}', 'show')->name('show'); // show
+        Route::get('/{id}/edit', 'edit')->name('edit'); // edit
     });
 
 
 // テスト用ルーティング
 // ルートには名前を付けることができる。名前を付けておくと、ビューからリンクを貼るときに便利
-Route::resource('contacts', ContactFormController::class);
+// Route::resource('contacts', ContactFormController::class);
 
 
 
