@@ -9,6 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                  @if ($errors->any())     
+                  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">         
+                    <ul>             
+                      @foreach ($errors->all() as $error) 
+                      <li>{{ $error }}</li>             
+                      @endforeach        
+                    </ul>     
+                  </div>
+                   @endif
                   {{-- フォーム開始 --}}
                   <form action="{{route('contacts.store')}}" method="post">
                     @csrf
@@ -23,28 +32,28 @@
                             <div class="p-2 w-full">
                               <div class="relative">
                                 <label for="name" class="leading-7 text-sm text-gray-600">名前</label>
-                                <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input type="text" id="name" name="name" placeholder="例）山田太郎" value="{{old('name')}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                               </div>
                             </div>
                             {{-- 件名 --}}
                             <div class="p-2 w-full">
                                 <div class="relative">
                                   <label for="title" class="leading-7 text-sm text-gray-600">件名</label>
-                                  <input type="text" id="title" name="title" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                  <input type="text" id="title" name="title" value="{{old('title')}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                               </div>
                             {{-- メアド --}}
                             <div class="p-2 w-full">
                               <div class="relative">
                                 <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
-                                <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input type="email" id="email" name="email" placeholder="example@gmail.com" value="{{old('email')}}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                               </div>
                             </div>
                             {{-- URL --}}
                             <div class="p-2 w-full">
                                 <div class="relative">
                                   <label for="url" class="leading-7 text-sm text-gray-600">URL</label>
-                                  <input type="url" id="url" name="url" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                  <input type="url" id="url" name="url" placeholder="http://www.example.com" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                               </div>
 
@@ -52,8 +61,8 @@
                               <div class="p-2 w-full">
                                 <div class="relative">
                                   <label for="gender" class="leading-7 text-sm text-gray-600">性別</label><br>
-                                  <input type="radio" id="gender" name="gender" value="0">男性
-                                  <input type="radio" id="gender" name="gender" value="0">女性
+                                  <input type="radio" id="gender" name="gender" value="0" value="{{old('gender') === 0 ? 'checked':''}}">男性
+                                  <input type="radio" id="gender" name="gender" value="1" value="{{old('gender') === 1 ? 'checked':''}}">女性
                                 </div>
                               </div>
 
@@ -73,7 +82,7 @@
                             <div class="p-2 w-full">
                               <div class="relative">
                                 <label for="contact" class="leading-7 text-sm text-gray-600">お問い合わせ内容</label>
-                                <textarea id="contact" name="contact" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                <textarea id="contact" name="contact" placeholder="ご意見・ご感想などご自由にご記入ください" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{old('contact')}}</textarea>
                               </div>
                             </div>
 
